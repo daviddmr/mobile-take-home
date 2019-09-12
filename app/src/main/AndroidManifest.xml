@@ -22,7 +22,9 @@
 
         <activity android:name=".EpisodeDetailActivity" />
 
-        <activity android:name=".CharacterDetailActivity" />
+        <activity
+            android:name=".CharacterDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

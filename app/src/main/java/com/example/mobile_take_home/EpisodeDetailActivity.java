@@ -44,12 +44,12 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
         callRequestCharacters(charactersUrlList);
     }
 
-    private void setupToolbar(String episodeName) {
+    private void setupToolbar(String title) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setTitle(episodeName);
+            actionBar.setTitle(title);
         }
     }
 
