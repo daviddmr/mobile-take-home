@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.mobile_take_home.http.request.ImageRequest;
 import com.example.mobile_take_home.model.Character;
 
 import java.util.List;
@@ -39,6 +40,9 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
         Character character = characterList.get(position);
+
+        ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
+        request.execute(character.getImage());
 
         holder.mainLayout.setOnClickListener(listener);
         holder.mainLayout.setId(position);
