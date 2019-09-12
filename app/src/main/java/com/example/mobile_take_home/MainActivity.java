@@ -1,5 +1,6 @@
 package com.example.mobile_take_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.mobile_take_home.util.ShowMessageUtil;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addOnScrollListener(onScrollEpisodesListener());
 
         adapter = new EpisodesAdapter(this, episodeList, episodeClickListener());
         recyclerView.setAdapter(adapter);
@@ -73,6 +76,22 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
     public void onError() {
         ShowMessageUtil.longSnackBar(mainLayout, "Erro!!!");
         progressBar.setVisibility(View.GONE);
+    }
+
+    public RecyclerView.OnScrollListener onScrollEpisodesListener() {
+        return new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+                //Checking if the scroll is at the bottom and requesting more episodes
+                if (linearLayoutManager != null && episodeList.size() == linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1 &&
+                        !urlNextPage.equalsIgnoreCase("")) {
+                    callRequestEpisodes(urlNextPage);
+                }
+            }
+        };
     }
 
     private View.OnClickListener episodeClickListener() {
