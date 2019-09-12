@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.mobile_take_home.controller.CharacterController;
+import com.example.mobile_take_home.http.HttpResponseInterface;
+import com.example.mobile_take_home.http.request.HttpRequest;
 import com.example.mobile_take_home.model.Character;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EpisodeDetailActivity extends AppCompatActivity {
+public class EpisodeDetailActivity extends AppCompatActivity implements HttpResponseInterface {
 
     public static final String ARG_CHARACTERS_URL_LIST = "arg_characters_url_list";
 
@@ -29,6 +32,7 @@ public class EpisodeDetailActivity extends AppCompatActivity {
         setupComponents();
 
         ArrayList<String> charactersUrlList = getIntent().getStringArrayListExtra(ARG_CHARACTERS_URL_LIST);
+        callRequestCharacters(charactersUrlList);
     }
 
     private void setupComponents() {
@@ -42,10 +46,39 @@ public class EpisodeDetailActivity extends AppCompatActivity {
         rvCharacters.setAdapter(adapter);
     }
 
+    private void callRequestCharacters(ArrayList<String> charactersUrlList) {
+        progressBar.setVisibility(View.VISIBLE);
+        HttpRequest request = new HttpRequest(this);
+        request.execute(buildUrl(charactersUrlList));
+    }
+
+    private String buildUrl(ArrayList<String> charactersUrlList) {
+        StringBuilder ids = new StringBuilder();
+
+        for (String url : charactersUrlList) {
+            String characterId = url.substring(url.indexOf("character/") + 10);
+            ids.append(characterId);
+            ids.append(",");
+        }
+
+        return "https://rickandmortyapi.com/api/character/" + ids;
+    }
+
     private void updateList(ArrayList<Character> characters) {
         int lastIndex = characterList.size();
         characterList.addAll(characters);
         adapter.notifyItemRangeInserted(lastIndex, characters.size());
+    }
+
+    @Override
+    public void onSuccess(String response) {
+        updateList(CharacterController.simpleListFromJson(response));
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onError() {
+
     }
 
     private View.OnClickListener characterClickListener() {
