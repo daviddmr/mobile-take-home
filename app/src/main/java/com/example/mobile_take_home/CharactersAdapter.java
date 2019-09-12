@@ -44,6 +44,13 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         holder.mainLayout.setId(position);
         holder.tvName.setText(character.getName());
         holder.tvStatus.setText(character.getStatus());
+
+        if (character.getStatus().equalsIgnoreCase("Dead")) {
+            holder.ivStatus.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivStatus.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
