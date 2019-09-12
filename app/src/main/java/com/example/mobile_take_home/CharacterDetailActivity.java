@@ -2,8 +2,10 @@ package com.example.mobile_take_home;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mobile_take_home.http.request.ImageRequest;
 import com.example.mobile_take_home.model.Character;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,17 +16,21 @@ public class CharacterDetailActivity extends AppCompatActivity {
 
     public static final String ARG_CHARACTER = "arg_character";
 
+    private ImageView ivCharacterPhoto;
+    private TextView tvName;
+
+    private Character character;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_detail);
 
-        Character character = getIntent().getParcelableExtra(ARG_CHARACTER);
+        character = getIntent().getParcelableExtra(ARG_CHARACTER);
 
         setupToolbar(character.getName());
         setupComponents();
-        TextView tvName = findViewById(R.id.tv_name);
-        tvName.setText(character.getName());
+        fillCharactersFields();
     }
 
     private void setupToolbar(String title) {
@@ -38,6 +44,18 @@ public class CharacterDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void setupComponents() {
+        ivCharacterPhoto = findViewById(R.id.iv_character_photo);
+        tvName = findViewById(R.id.tv_name);
+    }
+
+    private void fillCharactersFields() {
+        ImageRequest imageRequest = new ImageRequest(ivCharacterPhoto);
+        imageRequest.execute(character.getImage());
+
+        tvName.setText(character.getName());
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -47,7 +65,5 @@ public class CharacterDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupComponents() {
-    }
 
 }
