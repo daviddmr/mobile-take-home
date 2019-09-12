@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.mobile_take_home.controller.CharacterController;
 import com.example.mobile_take_home.http.HttpResponseInterface;
@@ -69,7 +69,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(this, 2);
         rvCharacters.setLayoutManager(linearLayoutManager);
 
-        adapter = new CharactersAdapter(this, characterList, characterClickListener());
+        adapter = new CharactersAdapter(this, characterList, characterOnClickListener(), characterOnLongClickListener());
         rvCharacters.setAdapter(adapter);
     }
 
@@ -108,7 +108,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
     }
 
-    private View.OnClickListener characterClickListener() {
+    private View.OnClickListener characterOnClickListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +116,19 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
                 Intent intent = new Intent(EpisodeDetailActivity.this, CharacterDetailActivity.class);
                 intent.putExtra(CharacterDetailActivity.ARG_CHARACTER, characterList.get(position));
                 startActivity(intent);
+            }
+        };
+    }
+
+    private View.OnLongClickListener characterOnLongClickListener() {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                int position = view.getId();
+                Character character = characterList.get(position);
+                Toast.makeText(EpisodeDetailActivity.this, "Kill - " + character.getName(), Toast.LENGTH_LONG).show();
+
+                return true;
             }
         };
     }

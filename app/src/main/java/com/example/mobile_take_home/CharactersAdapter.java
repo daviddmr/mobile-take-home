@@ -21,12 +21,14 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 
     private LayoutInflater layoutInflater;
     private List<Character> characterList;
-    private View.OnClickListener listener;
+    private View.OnClickListener onClickListener;
+    private View.OnLongClickListener onLongClickListener;
 
-    public CharactersAdapter(Context context, List<Character> characterList, View.OnClickListener listener) {
+    public CharactersAdapter(Context context, List<Character> characterList, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listener = listener;
         this.characterList = characterList;
+        this.onClickListener = onClickListener;
+        this.onLongClickListener = onLongClickListener;
     }
 
     @NonNull
@@ -44,7 +46,8 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
         request.execute(character.getImage());
 
-        holder.mainLayout.setOnClickListener(listener);
+        holder.mainLayout.setOnClickListener(onClickListener);
+        holder.mainLayout.setOnLongClickListener(onLongClickListener);
         holder.mainLayout.setId(position);
         holder.tvName.setText(character.getName());
         holder.tvStatus.setText(character.getStatus());

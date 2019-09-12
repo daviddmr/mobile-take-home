@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CharacterDetailActivity extends AppCompatActivity {
 
-    public static final String ARG_CHARACTER = "character";
+    public static final String ARG_CHARACTER = "arg_character";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
