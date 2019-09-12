@@ -47,7 +47,6 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         request.execute(character.getImage());
 
         holder.mainLayout.setOnClickListener(onClickListener);
-        holder.mainLayout.setOnLongClickListener(onLongClickListener);
         holder.mainLayout.setId(position);
         holder.tvName.setText(character.getName());
         holder.tvStatus.setText(character.getStatus());
@@ -56,6 +55,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
             holder.ivStatus.setVisibility(View.VISIBLE);
         } else {
             holder.ivStatus.setVisibility(View.GONE);
+            holder.mainLayout.setOnLongClickListener(onLongClickListener);
         }
 
     }
