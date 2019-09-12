@@ -14,9 +14,12 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        callRequestEpisodes("https://rickandmortyapi.com/api/episode/");
+    }
 
+    private void callRequestEpisodes(String url) {
         HttpRequest request = new HttpRequest(this);
-        request.execute("https://rickandmortyapi.com/api/episode/");
+        request.execute(url);
     }
 
     @Override
