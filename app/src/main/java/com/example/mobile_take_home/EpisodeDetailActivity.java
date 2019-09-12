@@ -1,5 +1,6 @@
 package com.example.mobile_take_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -86,6 +87,9 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
             @Override
             public void onClick(View view) {
                 int position = view.getId();
+                Intent intent = new Intent(EpisodeDetailActivity.this, CharacterDetailActivity.class);
+                intent.putExtra(CharacterDetailActivity.ARG_CHARACTER, characterList.get(position));
+                startActivity(intent);
             }
         };
     }
