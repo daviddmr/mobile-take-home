@@ -16,6 +16,7 @@ import com.example.mobile_take_home.util.ShowMessageUtil;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,8 +34,18 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupToolbar(getString(R.string.title_main_activity));
         setupComponents();
+
         callRequestEpisodes("https://rickandmortyapi.com/api/episode/");
+    }
+
+    private void setupToolbar(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+        }
     }
 
     private void setupComponents() {

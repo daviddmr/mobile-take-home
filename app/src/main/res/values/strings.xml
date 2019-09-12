@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mobile-take-home</string>
+
+    <string name="title_main_activity">Episode List</string>
 </resources>
