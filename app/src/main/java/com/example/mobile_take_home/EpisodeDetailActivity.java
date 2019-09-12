@@ -11,10 +11,12 @@ import com.example.mobile_take_home.controller.CharacterController;
 import com.example.mobile_take_home.http.HttpResponseInterface;
 import com.example.mobile_take_home.http.request.HttpRequest;
 import com.example.mobile_take_home.model.Character;
+import com.example.mobile_take_home.util.Constants;
 
 import java.util.ArrayList;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -88,7 +90,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
             ids.append(",");
         }
 
-        return "https://rickandmortyapi.com/api/character/" + ids;
+        return Constants.CHARACTER_LIST_URL + ids;
     }
 
     private void updateList(ArrayList<Character> characters) {

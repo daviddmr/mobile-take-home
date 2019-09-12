@@ -11,6 +11,7 @@ import com.example.mobile_take_home.http.HttpResponseInterface;
 import com.example.mobile_take_home.http.request.HttpRequest;
 import com.example.mobile_take_home.http.response.EpisodeHttpResponse;
 import com.example.mobile_take_home.model.Episode;
+import com.example.mobile_take_home.util.Constants;
 import com.example.mobile_take_home.util.ShowMessageUtil;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
         setupToolbar(getString(R.string.title_main_activity));
         setupComponents();
 
-        callRequestEpisodes("https://rickandmortyapi.com/api/episode/");
+        callRequestEpisodes(Constants.EPISODE_LIST_URL);
     }
 
     private void setupToolbar(String title) {
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
 
                 //Checking if the scroll is at the bottom and requesting more episodes
                 if (linearLayoutManager != null && episodeList.size() == linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1 &&
-                        !urlNextPage.equalsIgnoreCase("")) {
+                        !urlNextPage.isEmpty()) {
                     callRequestEpisodes(urlNextPage);
                 }
             }
