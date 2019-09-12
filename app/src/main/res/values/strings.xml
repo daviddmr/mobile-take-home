@@ -2,4 +2,10 @@
     <string name="app_name">mobile-take-home</string>
 
     <string name="title_main_activity">Episode List</string>
+
+    <string name="title_dialog_to_kill">Do you want to kill %s ?</string>
+    <string name="yes_answer">Die!</string>
+    <string name="no_answer">Not.. for now</string>
+    <string name="no_answer_complement">%s is still breathing</string>
+
 </resources>

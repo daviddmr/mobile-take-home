@@ -1,5 +1,6 @@
 package com.example.mobile_take_home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -128,10 +129,33 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
             public boolean onLongClick(View view) {
                 int position = view.getId();
                 Character character = characterList.get(position);
-                Toast.makeText(EpisodeDetailActivity.this, "Kill - " + character.getName(), Toast.LENGTH_LONG).show();
+                showKillCharacterAlertDialog(character, position);
 
                 return true;
             }
         };
+    }
+
+    private void showKillCharacterAlertDialog(final Character character, final int position) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        String title = String.format(getString(R.string.title_dialog_to_kill), character.getName());
+        dialog.setTitle(title);
+
+        dialog.setPositiveButton(getString(R.string.yes_answer), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                character.setStatus("Dead");
+                adapter.notifyItemChanged(position);
+            }
+        });
+
+        dialog.setNegativeButton(getString(R.string.no_answer), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), String.format(getString(R.string.no_answer_complement), character.getName()), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
     }
 }
