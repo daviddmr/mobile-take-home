@@ -18,6 +18,11 @@ public class ImageRequest extends AsyncTask<String, String, Bitmap> {
     private final WeakReference<ImageView> imageViewReference;
     private final WeakReference<ProgressBar> progressBarWeakReference;
 
+    public ImageRequest(ImageView imageView) {
+        imageViewReference = new WeakReference<>(imageView);
+        progressBarWeakReference = null;
+    }
+
     public ImageRequest(ImageView imageView, ProgressBar progressBar) {
         imageViewReference = new WeakReference<>(imageView);
         progressBarWeakReference = new WeakReference<>(progressBar);
@@ -41,8 +46,10 @@ public class ImageRequest extends AsyncTask<String, String, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         ImageView imageView = imageViewReference.get();
-        ProgressBar progressBar = progressBarWeakReference.get();
         imageView.setImageBitmap(bitmap);
-        progressBar.setVisibility(View.GONE);
+        if (progressBarWeakReference != null) {
+            ProgressBar progressBar = progressBarWeakReference.get();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
