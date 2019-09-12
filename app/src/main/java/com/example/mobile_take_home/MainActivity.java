@@ -98,8 +98,12 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
             @Override
             public void onClick(View view) {
                 int position = view.getId();
+                final Episode episode = episodeList.get(position);
+                String episodeName = episode.getEpisode() + " - " + episode.getName();
+
                 Intent intent = new Intent(MainActivity.this, EpisodeDetailActivity.class);
-                intent.putStringArrayListExtra(EpisodeDetailActivity.ARG_CHARACTERS_URL_LIST, episodeList.get(position).getCharacters());
+                intent.putExtra(EpisodeDetailActivity.ARG_EPISODE_NAME, episodeName);
+                intent.putStringArrayListExtra(EpisodeDetailActivity.ARG_CHARACTERS_URL_LIST, episode.getCharacters());
                 startActivity(intent);
             }
         };

@@ -2,8 +2,10 @@ package com.example.mobile_take_home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toolbar;
 
 import com.example.mobile_take_home.controller.CharacterController;
 import com.example.mobile_take_home.http.HttpResponseInterface;
@@ -12,6 +14,7 @@ import com.example.mobile_take_home.model.Character;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EpisodeDetailActivity extends AppCompatActivity implements HttpResponseInterface {
 
+    public static final String ARG_EPISODE_NAME = "arg_episode_name";
     public static final String ARG_CHARACTERS_URL_LIST = "arg_characters_url_list";
 
     private ProgressBar progressBar;
@@ -30,10 +34,32 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
-        setupComponents();
 
         ArrayList<String> charactersUrlList = getIntent().getStringArrayListExtra(ARG_CHARACTERS_URL_LIST);
+        String episodeName = getIntent().getStringExtra(ARG_EPISODE_NAME);
+
+        setupToolbar(episodeName);
+        setupComponents();
+
         callRequestCharacters(charactersUrlList);
+    }
+
+    private void setupToolbar(String episodeName) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle(episodeName);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupComponents() {
