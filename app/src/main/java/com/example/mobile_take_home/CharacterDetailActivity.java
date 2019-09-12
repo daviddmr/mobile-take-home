@@ -18,6 +18,12 @@ public class CharacterDetailActivity extends AppCompatActivity {
 
     private ImageView ivCharacterPhoto;
     private TextView tvName;
+    private TextView tvStatus;
+    private TextView tvSpecies;
+    private TextView tvType;
+    private TextView tvGender;
+    private TextView tvOrigin;
+    private TextView tvLocation;
 
     private Character character;
 
@@ -47,6 +53,12 @@ public class CharacterDetailActivity extends AppCompatActivity {
     private void setupComponents() {
         ivCharacterPhoto = findViewById(R.id.iv_character_photo);
         tvName = findViewById(R.id.tv_name);
+        tvStatus = findViewById(R.id.tv_status);
+        tvSpecies = findViewById(R.id.tv_species);
+        tvType = findViewById(R.id.tv_type);
+        tvGender = findViewById(R.id.tv_gender);
+        tvOrigin = findViewById(R.id.tv_origin);
+        tvLocation = findViewById(R.id.tv_location);
     }
 
     private void fillCharactersFields() {
@@ -54,6 +66,13 @@ public class CharacterDetailActivity extends AppCompatActivity {
         imageRequest.execute(character.getImage());
 
         tvName.setText(character.getName());
+        tvStatus.setText(character.getStatus());
+        tvSpecies.setText(character.getSpecies());
+        tvType.setText(character.getType());
+        tvGender.setText(character.getGender());
+        tvOrigin.setText(character.getOrigin().getName());
+        tvLocation.setText(character.getLocation().getName());
+
     }
 
     @Override
