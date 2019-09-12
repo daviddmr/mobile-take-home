@@ -2,7 +2,6 @@ package com.example.mobile_take_home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -99,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
             @Override
             public void onClick(View view) {
                 int position = view.getId();
-                Log.d("TAG", "onClick - Pos:" + position);
+                Intent intent = new Intent(MainActivity.this, EpisodeDetailActivity.class);
+                intent.putStringArrayListExtra(EpisodeDetailActivity.ARG_CHARACTERS_URL_LIST, episodeList.get(position).getCharacters());
+                startActivity(intent);
             }
         };
     }

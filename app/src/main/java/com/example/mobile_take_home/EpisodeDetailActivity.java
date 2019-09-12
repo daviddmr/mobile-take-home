@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class EpisodeDetailActivity extends AppCompatActivity {
 
+    public static final String ARG_CHARACTERS_URL_LIST = "arg_characters_url_list";
+
     private ProgressBar progressBar;
 
     private CharactersAdapter adapter;
@@ -25,6 +27,8 @@ public class EpisodeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_episode_detail);
         setupComponents();
+
+        ArrayList<String> charactersUrlList = getIntent().getStringArrayListExtra(ARG_CHARACTERS_URL_LIST);
     }
 
     private void setupComponents() {
