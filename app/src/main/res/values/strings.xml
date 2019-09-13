@@ -18,8 +18,13 @@
     <string name="number_episode_label"><b>Season:</b> %s - <b>Episode:</b> %s</string>
     <string name="air_date_episode_label"><b>Air Date:</b> %s</string>
 
-    <!--Character Item List-->
+    <!--Character Info labels-->
     <string name="character_name_label">Name: </string>
     <string name="character_status_label">Status: </string>
+    <string name="character_specie_label">Specie: </string>
+    <string name="character_type_label">Type: </string>
+    <string name="character_gender_label">Gender: </string>
+    <string name="character_origin_label">Origin: </string>
+    <string name="character_location_label">Location: </string>
 
 </resources>
