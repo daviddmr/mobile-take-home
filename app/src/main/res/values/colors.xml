@@ -8,4 +8,5 @@
     <color name="rick_lab_coat_color">#FFFFFF</color>
     <color name="morty_hair_color">#8C5423</color>
     <color name="morty_t_shirt_color">#FFF76B</color>
+    <color name="character_eye_color">#000000</color>
 </resources>
