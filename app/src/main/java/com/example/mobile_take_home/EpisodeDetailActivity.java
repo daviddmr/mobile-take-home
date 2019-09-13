@@ -2,6 +2,7 @@ package com.example.mobile_take_home;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +17,16 @@ import com.example.mobile_take_home.util.Constants;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.LruCache;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EpisodeDetailActivity extends AppCompatActivity implements HttpResponseInterface {
+public class EpisodeDetailActivity extends AppCompatActivity implements HttpResponseInterface, OnItemClickInterface {
 
     public static final String ARG_EPISODE_NAME = "arg_episode_name";
     public static final String ARG_CHARACTERS_URL_LIST = "arg_characters_url_list";
@@ -72,7 +75,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(this, 2);
         rvCharacters.setLayoutManager(linearLayoutManager);
 
-        adapter = new CharactersAdapter(this, characterList, characterOnClickListener(), characterOnLongClickListener());
+        adapter = new CharactersAdapter(this, characterList, this);
         rvCharacters.setAdapter(adapter);
     }
 
@@ -111,31 +114,6 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
     }
 
-    private View.OnClickListener characterOnClickListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = view.getId();
-                Intent intent = new Intent(EpisodeDetailActivity.this, CharacterDetailActivity.class);
-                intent.putExtra(CharacterDetailActivity.ARG_CHARACTER, characterList.get(position));
-                startActivity(intent);
-            }
-        };
-    }
-
-    private View.OnLongClickListener characterOnLongClickListener() {
-        return new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                int position = view.getId();
-                Character character = characterList.get(position);
-                showKillCharacterAlertDialog(character, position);
-
-                return true;
-            }
-        };
-    }
-
     private void showKillCharacterAlertDialog(final Character character, final int position) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         String title = String.format(getString(R.string.title_dialog_to_kill), character.getName());
@@ -157,5 +135,18 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(EpisodeDetailActivity.this, CharacterDetailActivity.class);
+        intent.putExtra(CharacterDetailActivity.ARG_CHARACTER, characterList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLongClick(int position) {
+        Character character = characterList.get(position);
+        showKillCharacterAlertDialog(character, position);
     }
 }

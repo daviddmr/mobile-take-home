@@ -72,7 +72,6 @@ public class CharacterDetailActivity extends AppCompatActivity {
         tvGender.setText(character.getGender());
         tvOrigin.setText(character.getOrigin().getName());
         tvLocation.setText(character.getLocation().getName());
-
     }
 
     @Override
@@ -83,6 +82,5 @@ public class CharacterDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }

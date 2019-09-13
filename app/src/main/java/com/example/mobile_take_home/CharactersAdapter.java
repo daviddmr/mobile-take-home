@@ -21,14 +21,12 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
 
     private LayoutInflater layoutInflater;
     private List<Character> characterList;
-    private View.OnClickListener onClickListener;
-    private View.OnLongClickListener onLongClickListener;
+    private OnItemClickInterface onItemClickInterface;
 
-    public CharactersAdapter(Context context, List<Character> characterList, View.OnClickListener onClickListener, View.OnLongClickListener onLongClickListener) {
+    public CharactersAdapter(Context context, List<Character> characterList, OnItemClickInterface onItemClickInterface) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.characterList = characterList;
-        this.onClickListener = onClickListener;
-        this.onLongClickListener = onLongClickListener;
+        this.onItemClickInterface = onItemClickInterface;
     }
 
     @NonNull
@@ -40,13 +38,13 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CharacterViewHolder holder, final int position) {
         Character character = characterList.get(position);
 
         ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
         request.execute(character.getImage());
 
-        holder.mainLayout.setOnClickListener(onClickListener);
+        holder.mainLayout.setOnClickListener(onClickListener(position));
         holder.mainLayout.setId(position);
         holder.tvName.setText(character.getName());
         holder.tvStatus.setText(character.getStatus());
@@ -55,9 +53,28 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
             holder.ivStatus.setVisibility(View.VISIBLE);
         } else {
             holder.ivStatus.setVisibility(View.GONE);
-            holder.mainLayout.setOnLongClickListener(onLongClickListener);
+            holder.mainLayout.setOnLongClickListener(onLongClickListener(position));
         }
+    }
 
+    private View.OnClickListener onClickListener(final int position) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickInterface.onClick(position);
+            }
+        };
+    }
+
+    private View.OnLongClickListener onLongClickListener(final int position) {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onItemClickInterface.onLongClick(position);
+
+                return true;
+            }
+        };
     }
 
     @Override
