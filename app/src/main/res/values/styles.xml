@@ -38,4 +38,12 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="label_style_small" parent="label_style">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="info_style_small" parent="info_style">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

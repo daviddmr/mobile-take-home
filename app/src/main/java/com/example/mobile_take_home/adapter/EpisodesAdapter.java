@@ -47,9 +47,10 @@ public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.Episod
 
         final Episode episode = episodeList.get(position);
 
-        holder.tvName.setText(String.format(context.getString(R.string.name_episode_label), episode.getName()));
-        holder.tvEpisode.setText(String.format(context.getString(R.string.number_episode_label), episode.getEpisode().substring(1, 3), episode.getEpisode().substring(4, 6)));
-        holder.tvAirDate.setText(String.format(context.getString(R.string.air_date_episode_label), episode.getAirDate()));
+        holder.tvName.setText(episode.getName());
+        holder.tvSeason.setText(episode.getEpisode().substring(1, 3));
+        holder.tvEpisode.setText(episode.getEpisode().substring(4, 6));
+        holder.tvAirDate.setText(episode.getAirDate());
     }
 
     @Override
@@ -60,6 +61,7 @@ public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.Episod
     class EpisodeViewHolder extends RecyclerView.ViewHolder {
         CardView mainLayout;
         TextView tvName;
+        TextView tvSeason;
         TextView tvEpisode;
         TextView tvAirDate;
 
@@ -68,6 +70,7 @@ public class EpisodesAdapter extends RecyclerView.Adapter<EpisodesAdapter.Episod
 
             mainLayout = itemView.findViewById(R.id.main_layout);
             tvName = itemView.findViewById(R.id.tv_name);
+            tvSeason = itemView.findViewById(R.id.tv_season);
             tvEpisode = itemView.findViewById(R.id.tv_episode);
             tvAirDate = itemView.findViewById(R.id.tv_air_date);
         }

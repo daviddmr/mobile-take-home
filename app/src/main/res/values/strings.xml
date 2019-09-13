@@ -27,4 +27,10 @@
     <string name="character_origin_label">Origin: </string>
     <string name="character_location_label">Location: </string>
 
+    <!--Character Info labels-->
+    <string name="episode_name_label">Name: </string>
+    <string name="episode_season_label">Season: </string>
+    <string name="episode_episode_label"> - Episode: </string>
+    <string name="episode_air_date_label">Air Date: </string>
+
 </resources>
