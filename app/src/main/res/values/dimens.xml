@@ -1,6 +1,7 @@
 <resources>
     <dimen name="toolbar_title_expanded_size">28sp</dimen>
     <dimen name="app_bar_layout_height">280dp</dimen>
+    <dimen name="double_margin">16dp</dimen>
     <dimen name="regular_margin">8dp</dimen>
     <dimen name="half_margin">4dp</dimen>
     <dimen name="quarter_margin">2dp</dimen>
