@@ -14,4 +14,8 @@
     <string name="request_episodes_error_message">There was a problem requesting episode list</string>
     <string name="request_characters_error_message">There was a problem requesting character list</string>
 
+    <string name="name_episode_label"><b>Name:</b> %s</string>
+    <string name="number_episode_label"><b>Season:</b> %s - <b>Episode:</b> %s</string>
+    <string name="air_date_episode_label"><b>Air Date:</b> %s</string>
+
 </resources>
