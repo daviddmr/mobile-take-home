@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder> {
+public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder> implements ImageDownloadResponse {
 
     private LayoutInflater layoutInflater;
     private List<Character> characterList;
@@ -47,8 +47,8 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
             holder.ivPhoto.setImageBitmap(bitmap);
             holder.pbPhoto.setVisibility(View.GONE);
         } else {
-            ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
-            request.execute(character.getImage(), String.valueOf(character.getId()));
+            ImageRequest request = new ImageRequest(this, holder.ivPhoto, holder.pbPhoto);
+            request.execute(character.getImage(), character.getId(), position);
         }
 
         holder.mainLayout.setOnClickListener(onClickListener(position));
@@ -97,6 +97,11 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    @Override
+    public void onFinish(int position, Bitmap bitmap) {
+        characterList.get(position).setImageBitmap(bitmap);
     }
 
     class CharacterViewHolder extends RecyclerView.ViewHolder {

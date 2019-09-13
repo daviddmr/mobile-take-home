@@ -1,5 +1,6 @@
 package com.example.mobile_take_home.model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -30,6 +31,8 @@ public class Character implements Parcelable {
     private String url;
 
     private String created;
+
+    private Bitmap imageBitmap;
 
     public long getId() {
         return id;
@@ -127,6 +130,14 @@ public class Character implements Parcelable {
         this.created = created;
     }
 
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -146,6 +157,7 @@ public class Character implements Parcelable {
         dest.writeStringList(this.episode);
         dest.writeString(this.url);
         dest.writeString(this.created);
+        dest.writeParcelable(this.imageBitmap, flags);
     }
 
     public Character() {
@@ -164,6 +176,7 @@ public class Character implements Parcelable {
         this.episode = in.createStringArrayList();
         this.url = in.readString();
         this.created = in.readString();
+        this.imageBitmap = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Character> CREATOR = new Parcelable.Creator<Character>() {

@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mobile_take_home.http.request.ImageRequest;
 import com.example.mobile_take_home.model.Character;
 
 import androidx.appcompat.app.ActionBar;
@@ -62,9 +61,7 @@ public class CharacterDetailActivity extends AppCompatActivity {
     }
 
     private void fillCharactersFields() {
-        ImageRequest imageRequest = new ImageRequest(ivCharacterPhoto);
-        imageRequest.execute(character.getImage());
-
+        ivCharacterPhoto.setImageBitmap(character.getImageBitmap());
         tvName.setText(character.getName());
         tvStatus.setText(character.getStatus());
         tvSpecies.setText(character.getSpecies());
