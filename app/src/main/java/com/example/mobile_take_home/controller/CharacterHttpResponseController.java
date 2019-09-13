@@ -5,6 +5,7 @@ import com.example.mobile_take_home.http.response.CharacterHttpResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*Used only on request that have the field Info included on response*/
 public class CharacterHttpResponseController {
 
     public static CharacterHttpResponse fromJson(String data) {

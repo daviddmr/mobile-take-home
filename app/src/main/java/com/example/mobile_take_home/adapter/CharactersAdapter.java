@@ -1,4 +1,4 @@
-package com.example.mobile_take_home;
+package com.example.mobile_take_home.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.mobile_take_home.EpisodeDetailActivity;
+import com.example.mobile_take_home.http.ImageDownloadResponse;
+import com.example.mobile_take_home.R;
 import com.example.mobile_take_home.http.request.ImageRequest;
 import com.example.mobile_take_home.model.Character;
 
@@ -42,6 +45,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, final int position) {
         Character character = characterList.get(position);
 
+        //Checking if the bitmap is in cache
         Bitmap bitmap = EpisodeDetailActivity.getBitmapFromMemoryCache(character.getId());
         if (bitmap != null) {
             holder.ivPhoto.setImageBitmap(bitmap);
@@ -56,6 +60,7 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
         holder.tvName.setText(character.getName());
         holder.tvStatus.setText(character.getStatus());
 
+        //Checking if the character is Alive, Dead or Unknown
         if (character.getStatus().equalsIgnoreCase("Dead")) {
             holder.ivStatus.setVisibility(View.VISIBLE);
         } else {

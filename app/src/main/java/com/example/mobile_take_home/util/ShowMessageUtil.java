@@ -15,7 +15,7 @@ public class ShowMessageUtil {
 
     public static void longSnackBar(View view, String message) {
 //        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
-        int duration = 5000;
+        int duration = 8000;
         Snackbar snackbar = Snackbar.make(view, message, duration);
         View snackbarView = snackbar.getView();
         TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);

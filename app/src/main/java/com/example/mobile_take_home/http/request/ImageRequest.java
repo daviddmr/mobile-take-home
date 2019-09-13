@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.mobile_take_home.EpisodeDetailActivity;
-import com.example.mobile_take_home.ImageDownloadResponse;
+import com.example.mobile_take_home.http.ImageDownloadResponse;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class CharacterController {
 
     //To be used when the response does not have the field 'info'
-    public static ArrayList<Character> simpleListFromJson(String data) {
+    public static ArrayList<Character> listFromJson(String data) {
 
         ArrayList<Character> characterList = new ArrayList<>();
 

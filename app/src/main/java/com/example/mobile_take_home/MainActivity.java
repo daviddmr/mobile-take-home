@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.example.mobile_take_home.adapter.EpisodesAdapter;
 import com.example.mobile_take_home.controller.EpisodeHttpReponseController;
 import com.example.mobile_take_home.http.HttpResponseInterface;
 import com.example.mobile_take_home.http.request.HttpRequest;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements HttpResponseInter
 
     @Override
     public void onError() {
-        ShowMessageUtil.longSnackBar(mainLayout, "Erro!!!");
+        ShowMessageUtil.longSnackBar(mainLayout, getString(R.string.request_episodes_error_message));
         progressBar.setVisibility(View.GONE);
     }
 

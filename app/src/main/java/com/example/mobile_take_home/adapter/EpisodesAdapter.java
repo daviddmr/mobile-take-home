@@ -1,4 +1,4 @@
-package com.example.mobile_take_home;
+package com.example.mobile_take_home.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mobile_take_home.R;
 import com.example.mobile_take_home.model.Episode;
 
 import java.util.List;

@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">mobile-take-home</string>
 
+    <!--Title Activity-->
     <string name="title_main_activity">Episode List</string>
 
+    <!--Alert Dialog-->
     <string name="title_dialog_to_kill">Do you want to kill %s ?</string>
     <string name="yes_answer">Die!</string>
     <string name="no_answer">Not.. for now</string>
     <string name="no_answer_complement">%s is still breathing</string>
+
+    <!--Http Request Messages-->
+    <string name="request_episodes_error_message">There was a problem requesting episode list</string>
+    <string name="request_characters_error_message">There was a problem requesting character list</string>
 
 </resources>

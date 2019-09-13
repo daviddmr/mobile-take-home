@@ -1,4 +1,4 @@
-package com.example.mobile_take_home;
+package com.example.mobile_take_home.http;
 
 import android.graphics.Bitmap;
 
