@@ -35,6 +35,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
     private CharactersAdapter adapter;
     private ArrayList<Character> characterList = new ArrayList<>();
+    private static LruCache<Long, Bitmap> mMemoryCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
         setupToolbar(episodeName);
         setupComponents();
+        initializeMemoryCache();
 
         callRequestCharacters(charactersUrlList);
     }
@@ -77,6 +79,28 @@ public class EpisodeDetailActivity extends AppCompatActivity implements HttpResp
 
         adapter = new CharactersAdapter(this, characterList, this);
         rvCharacters.setAdapter(adapter);
+    }
+
+    private void initializeMemoryCache() {
+        final int maxMemorySize = (int) Runtime.getRuntime().maxMemory() / 1024;
+        final int cacheSize = maxMemorySize / 10;
+
+        mMemoryCache = new LruCache<Long, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(@NonNull Long key, @NonNull Bitmap value) {
+                return value.getByteCount() / 1024;
+            }
+        };
+    }
+
+    public static Bitmap getBitmapFromMemoryCache(Long key) {
+        return mMemoryCache.get(key);
+    }
+
+    public static void setBitmapToMemoryCache(Long key, Bitmap value) {
+        if (getBitmapFromMemoryCache(key) == null) {
+            mMemoryCache.put(key, value);
+        }
     }
 
     private void callRequestCharacters(ArrayList<String> charactersUrlList) {

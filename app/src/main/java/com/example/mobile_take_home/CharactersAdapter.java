@@ -1,6 +1,7 @@
 package com.example.mobile_take_home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,14 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, final int position) {
         Character character = characterList.get(position);
 
-        ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
-        request.execute(character.getImage());
+        Bitmap bitmap = EpisodeDetailActivity.getBitmapFromMemoryCache(character.getId());
+        if (bitmap != null) {
+            holder.ivPhoto.setImageBitmap(bitmap);
+            holder.pbPhoto.setVisibility(View.GONE);
+        } else {
+            ImageRequest request = new ImageRequest(holder.ivPhoto, holder.pbPhoto);
+            request.execute(character.getImage(), String.valueOf(character.getId()));
+        }
 
         holder.mainLayout.setOnClickListener(onClickListener(position));
         holder.mainLayout.setId(position);
@@ -80,6 +87,16 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     @Override
     public int getItemCount() {
         return characterList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     class CharacterViewHolder extends RecyclerView.ViewHolder {
