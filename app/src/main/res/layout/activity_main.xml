@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/morty_t_shirt_color"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp" />
+        android:paddingTop="@dimen/half_margin"
+        android:paddingBottom="@dimen/half_margin" />
 
     <ProgressBar
         android:id="@+id/pb"

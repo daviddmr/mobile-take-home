@@ -3,10 +3,10 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="4dp"
+    android:layout_marginStart="@dimen/regular_margin"
+    android:layout_marginTop="@dimen/half_margin"
+    android:layout_marginEnd="@dimen/regular_margin"
+    android:layout_marginBottom="@dimen/half_margin"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingStart="8dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp">
+        android:paddingStart="@dimen/regular_margin"
+        android:paddingTop="@dimen/half_margin"
+        android:paddingEnd="@dimen/regular_margin"
+        android:paddingBottom="@dimen/half_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
